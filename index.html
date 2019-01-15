@@ -13,69 +13,46 @@
             padding: 0;
             list-style: none;
         }
+        html{
+            font-size: 20px;
+        }
         div{
-            width: 10rem;
-            height: 10rem;
+            width: 5rem;
+            height: 5rem;
             background: red;
-            position: absolute;
-            top: 0;
-            left: 0;
-
         }
     </style>
     <script>
-        /*window.onload=function () {
-            var oDiv=document.querySelector('div');
-
-            oDiv.onmousedown=function (ev) {
-
-                var disX=ev.offsetX;
-                var disY=ev.offsetY;
-
-                document.onmousemove=function (ev) {
-                    oDiv.style.left=ev.clientX-disX+'px';
-                    oDiv.style.top=ev.clientY-disY+'px';
-                }
-
-                document.onmouseup=function () {
-                    document.onmousemove=null;
-                    document.onmouseup=null;
-                }
-            }
-        }*/
         document.addEventListener('DOMContentLoaded',function () {
             var oDiv=document.querySelector('div');
-            var x=0;
-            var y=0;
+            var x=oDiv.offsetLeft;
+            var y=oDiv.offsetTop;
 
             oDiv.addEventListener('touchstart',function (ev) {
-                var downX=ev.targetTouches[0].pageX-oDiv.offsetLeft-x;
-                var downY=ev.targetTouches[0].pageY-oDiv.offsetTop-y;
 
-                function move(ev){
-                    x=ev.targetTouches[0].pageX-downX;
-                    y=ev.targetTouches[0].pageY-downY;
+                var disx=ev.targetTouches[0].pageX-x;
+                var disy=ev.targetTouches[0].pageY-y;
+
+                function move(ev) {
+                    x=ev.targetTouches[0].pageX-disx;
+                    y=ev.targetTouches[0].pageY-disy;
+
                     oDiv.style.transform='translate('+x+'px,'+y+'px)';
                 }
-                function end(ev){
-                    
+
+                function end() {
                     document.removeEventListener('touchmove',move,false);
                     document.removeEventListener('touchend',end,false);
                 }
 
                 document.addEventListener('touchmove',move,false);
                 document.addEventListener('touchend',end,false);
-
-            },false);
-
-
-        },false)
+            },false)
+        },false);
     </script>
 </head>
 <body>
-    <div>
-
-    </div>
+    <div></div>
 </body>
 </html>
 
