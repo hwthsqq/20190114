@@ -39,15 +39,17 @@
             var y=0;
 
             obj.addEventListener('touchstart',function (ev) {
-
+                var id=ev.targetTouches[0].identifier;
                 var disx=ev.targetTouches[0].pageX-x;
                 var disy=ev.targetTouches[0].pageY-y;
 
                 function move(ev) {
-                    x=ev.targetTouches[0].pageX-disx;
-                    y=ev.targetTouches[0].pageY-disy;
+                    if(ev.targetTouches[0].identifier==id){
+                        x=ev.targetTouches[0].pageX-disx;
+                        y=ev.targetTouches[0].pageY-disy;
 
-                    obj.style.transform='translate('+x+'px,'+y+'px)';
+                        obj.style.transform='translate('+x+'px,'+y+'px)';
+                    }
                 }
 
                 function end() {
