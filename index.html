@@ -20,15 +20,25 @@
             width: 5rem;
             height: 5rem;
             background: red;
+            position: absolute;
+            top: 0px;
+            left: 0;
+        }
+        .div2{
+            width: 5rem;
+            height: 5rem;
+            background: blue;
+            position: absolute;
+            top: 100px;
+            left: 250px;
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded',function () {
-            var oDiv=document.querySelector('div');
-            var x=oDiv.offsetLeft;
-            var y=oDiv.offsetTop;
+        function drag(obj){
+            var x=0;
+            var y=0;
 
-            oDiv.addEventListener('touchstart',function (ev) {
+            obj.addEventListener('touchstart',function (ev) {
 
                 var disx=ev.targetTouches[0].pageX-x;
                 var disy=ev.targetTouches[0].pageY-y;
@@ -37,7 +47,7 @@
                     x=ev.targetTouches[0].pageX-disx;
                     y=ev.targetTouches[0].pageY-disy;
 
-                    oDiv.style.transform='translate('+x+'px,'+y+'px)';
+                    obj.style.transform='translate('+x+'px,'+y+'px)';
                 }
 
                 function end() {
@@ -50,11 +60,21 @@
 
                 ev.preventDefault();
             },false)
+        }
+
+        document.addEventListener('DOMContentLoaded',function () {
+            var aDiv=document.querySelectorAll('div');
+
+            for(var i=0;i<aDiv.length;i++){
+                drag(aDiv[i]);
+            }
+
         },false);
     </script>
 </head>
 <body>
     <div></div>
+    <div class="div2"></div>
 </body>
 </html>
 
